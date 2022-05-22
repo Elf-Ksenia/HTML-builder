@@ -3,7 +3,13 @@
   "version": "1.0.0",
   "description": "html-builder task for RSSchool",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "node 01-read-file": "node 01-read-file",
+    "node 02-write-file": "node 02-write-file",
+    "node 03-files-in-folder": "node 03-files-in-folder",
+    "node 04-copy-directory": "node 04-copy-dirextory",
+    "node 05-merge-styles": "node 05-merge-styles",
+    "node 06-build-page": "node 06-build-page"
   },
   "author": "evgeniimal",
   "license": "ISC",
