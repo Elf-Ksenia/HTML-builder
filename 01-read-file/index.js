@@ -1,22 +1,12 @@
-const path = require("path");
-const fs = require("fs");
+const fs = require('fs');
+const path = require('path');
 const fileName = path.join(__dirname, '../01-read-file/text.txt')
 
-fs.readFile(fileName, function(error, data){
-    if (error) {
-        console.log(error);
-    } else {
-        console.log(data.toString()); // содержимое файла
-    }
-});
- 
-/*
-const stream = new fs.ReadStream(fileName);
- 
-stream.on(fileName, function(){
-    const data = stream.read();
-    console.log(data);
-});*/
+const stream = fs.createReadStream(path.join(fileName), 'utf-8');
+let data = '';
+stream.on('data', chunk => data = chunk);
+stream.on('end', () => console.log(data));
+stream.on('error', error => console.log(error));
 
 
 
