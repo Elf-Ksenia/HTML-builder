@@ -1,27 +1,33 @@
 const fs = require('fs');
 const path = require('path');
-const readline = require('readline').createInterface({
-  input: process.stdin,
-  output: process.stdout
-});
+const rl = require('readline');
+const { stdin } = require('process');
+const readline = rl.createInterface(stdin);
+
 
 const filePath = path.join(__dirname, '../02-write-file/data-from-console.txt')
+const streamData = fs.createReadStream(filePath, 'utf-8');
 
-if (!filePath) {
-  fs.open(filePath, 'w', (error) => {
-    if (error) throw error;
-  });
-}
+const stream = fs.createWriteStream(
+  path.join(filePath), 'utf-8',
+  err => {
+    if (err) throw err;
+  }
+);
 
-readline.question('insert data here\n', (data) => {
-  if (data === 'exit') {
+console.log('insert data here')
+readline.on('line', (data) => {
+  if (data.toString() === 'exit') {
     console.log('Data was succesfully inserted to the file');
-    process.exit(0);
+    process.exit();
   }
   else {
-    fs.writeFile(filePath, data, function (error) {
-      if (error) throw error;
-    })
+    stream.write(data.toString() + '\n');
   }
-})
+});
+
+process.on('SIGINT', () => {
+  console.log('Data was succesfully inserted to the file');
+  process.exit();
+});
 

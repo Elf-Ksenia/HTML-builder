@@ -1,6 +1,7 @@
 const path = require("path");
 const fs = require("fs");
 const fileName = path.join(__dirname, '../01-read-file/text.txt')
+
 fs.readFile(fileName, function(error, data){
     if (error) {
         console.log(error);
@@ -8,4 +9,14 @@ fs.readFile(fileName, function(error, data){
         console.log(data.toString()); // содержимое файла
     }
 });
+ 
+/*
+const stream = new fs.ReadStream(fileName);
+ 
+stream.on(fileName, function(){
+    const data = stream.read();
+    console.log(data);
+});*/
+
+
 

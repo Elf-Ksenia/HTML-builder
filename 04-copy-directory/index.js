@@ -3,6 +3,13 @@ const path = require('path');
 const dest = path.join(__dirname, '../04-copy-directory/files-copy');
 const src = path.join(__dirname, '../04-copy-directory/files');
 
+fs.stat(dest, function (err) {
+  if (err) {
+    fs.mkdir(dest, err => {
+      console.log('folder ceated');
+    })
+  }
+})
 fs.readdir(src, (err, files) => {
   if (err)
     console.log(err);
@@ -15,12 +22,6 @@ fs.readdir(src, (err, files) => {
       });
 
       fs.copyFile(srcfile, destfile, (err) => {
-        if (!dest) {
-          fs.mkdir(dest, err => {
-            if (err) throw err;
-            console.log('folder created successfully');
-          });
-        }
         if (err) throw err;
         console.log(`files/${file} was copied to files-copy/${file}`);
       });

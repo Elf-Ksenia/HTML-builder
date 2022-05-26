@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const dirname = path.join(__dirname, '../03-files-in-folder/secret-folder');
-
+const streamData = fs.createReadStream(filePath, 'utf-8');
 fs.readdir(dirname, (err, files) => {
   if (err)
     console.log(err);
@@ -16,7 +16,6 @@ fs.readdir(dirname, (err, files) => {
           console.log(`${fileName} - ${fileType} - ${fileSize}kb`)
         }
       })
-
     })
   }
 })
